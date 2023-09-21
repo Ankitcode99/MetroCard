@@ -1,6 +1,6 @@
-package org.example.Services;
+package org.example.geektrust.Services;
 
-import org.example.Entities.Journey;
+import org.example.geektrust.Entities.Journey;
 
 public interface JourneyService {
 

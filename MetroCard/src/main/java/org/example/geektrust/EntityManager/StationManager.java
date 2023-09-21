@@ -1,26 +1,30 @@
-package org.example.EntityManager;
+package org.example.geektrust.EntityManager;
 
-import org.example.Entities.Journey;
-import org.example.Enums.Station;
+import org.example.geektrust.Entities.Journey;
+import org.example.geektrust.Enums.Station;
+
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.example.geektrust.Constants.MetroCardConstants.ONE;
+import static org.example.geektrust.Constants.MetroCardConstants.ZERO;
 
 public class StationManager {
 
     private static final StationManager INSTANCE = new StationManager();
 
-    private final Map<String, Integer> stationCollectionMap;
-    private final Map<String, Integer> stationDiscountMap;
-    private final Map<String, Map<String, Integer>> stationPassengerTypeMap;
+    private Map<String, Integer> stationCollectionMap;
+    private Map<String, Integer> stationDiscountMap;
+    private Map<String, Map<String, Integer>> stationPassengerTypeMap;
 
     private StationManager(){
         stationCollectionMap = new HashMap<>();
         stationDiscountMap = new HashMap<>();
         stationPassengerTypeMap = new HashMap<>();
         for(Station station: Station.values()){
-            stationCollectionMap.put(station.name(), 0);
-            stationDiscountMap.put(station.name(), 0);
+            stationCollectionMap.put(station.name(), ZERO);
+            stationDiscountMap.put(station.name(), ZERO);
             stationPassengerTypeMap.put(station.name(), new HashMap<>());
         }
     }
@@ -39,7 +43,11 @@ public class StationManager {
         }
 
         Map<String, Integer> passengerTypeCountMap = stationPassengerTypeMap.get(stationName);
-        passengerTypeCountMap.put(passengerType, passengerTypeCountMap.get(passengerType)+1);
+        if(passengerTypeCountMap.containsKey(passengerType)){
+            passengerTypeCountMap.put(passengerType, passengerTypeCountMap.get(passengerType)+1);
+        }else{
+            passengerTypeCountMap.put(passengerType, ONE);
+        }
 
         stationPassengerTypeMap.put(stationName, passengerTypeCountMap);
     }

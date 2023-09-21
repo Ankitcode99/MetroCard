@@ -1,4 +1,4 @@
-package org.example.Entities;
+package org.example.geektrust.Entities;
 
 public class Card {
     private final String id;
@@ -13,7 +13,7 @@ public class Card {
         return this.id;
     }
 
-    public double getBalance(){
+    public int getBalance(){
         return this.balance;
     }
 

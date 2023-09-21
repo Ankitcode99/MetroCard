@@ -1,20 +1,22 @@
-package org.example;
+package org.example.geektrust;
 
-import org.example.Constants.MetroCardConstants;
-import org.example.Entities.Journey;
-import org.example.EntityManager.CardManager;
-import org.example.Enums.PassengerType;
-import org.example.Enums.Station;
-import org.example.Services.CardService;
-import org.example.Services.JourneyService;
-import org.example.Services.PrintingService;
-import org.example.Services.implementation.CardServiceImplementation;
-import org.example.Services.implementation.JourneyServiceImplementation;
-import org.example.Services.implementation.PrintingServiceImplementation;
+import org.example.geektrust.Constants.MetroCardConstants;
+import org.example.geektrust.Entities.Journey;
+import org.example.geektrust.Enums.PassengerType;
+import org.example.geektrust.Enums.Station;
+import org.example.geektrust.Services.CardService;
+import org.example.geektrust.Services.JourneyService;
+import org.example.geektrust.Services.PrintingService;
+import org.example.geektrust.Services.implementation.CardServiceImplementation;
+import org.example.geektrust.Services.implementation.JourneyServiceImplementation;
+import org.example.geektrust.Services.implementation.PrintingServiceImplementation;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
+
+import static org.example.geektrust.Constants.MetroCardConstants.THREE;
+import static org.example.geektrust.Constants.MetroCardConstants.TWO;
 
 public class MetroStationService {
 
@@ -32,18 +34,15 @@ public class MetroStationService {
         try {
             FileInputStream fileInputStream = new FileInputStream(args[0]);
             Scanner sc = new Scanner(fileInputStream);
-            System.out.println("REACHING HERE!!");
             while(sc.hasNextLine()){
-                String[] command = sc.nextLine().split(MetroCardConstants.SPACE, 2);
+                String[] command = sc.nextLine().split(MetroCardConstants.SPACE, TWO);
                 switch (command[0]) {
                     case "BALANCE":
-                        String[] cardProperties = command[1].split(MetroCardConstants.SPACE, 2);
-//                        card number - cardProperties[0]
-//                        card balance - Integer.parseInt(cardProperties[1])
+                        String[] cardProperties = command[1].split(MetroCardConstants.SPACE, TWO);
                         cardService.addCard(cardProperties[0], Integer.parseInt(cardProperties[1]));
                         break;
                     case "CHECK_IN":
-                        String[] journeyDetails = command[1].split(MetroCardConstants.SPACE, 3);
+                        String[] journeyDetails = command[1].split(MetroCardConstants.SPACE, THREE);
                         journeyService.checkInPassenger(new Journey(journeyDetails[0], PassengerType.valueOf(journeyDetails[1]), Station.valueOf(journeyDetails[2])));
                         break;
                     case "PRINT_SUMMARY":

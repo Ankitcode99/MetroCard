@@ -1,6 +1,4 @@
-package org.example.Entities;
-
-import org.example.Enums.PassengerType;
+package org.example.geektrust.Entities;
 
 public class PassengerCount implements Comparable<PassengerCount>{
     private final String passengerType;

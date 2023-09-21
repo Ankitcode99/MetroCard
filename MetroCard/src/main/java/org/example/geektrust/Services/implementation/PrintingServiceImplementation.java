@@ -1,9 +1,9 @@
-package org.example.Services.implementation;
+package org.example.geektrust.Services.implementation;
 
-import org.example.Entities.PassengerCount;
-import org.example.EntityManager.StationManager;
-import org.example.Enums.Station;
-import org.example.Services.PrintingService;
+import org.example.geektrust.Entities.PassengerCount;
+import org.example.geektrust.EntityManager.StationManager;
+import org.example.geektrust.Enums.Station;
+import org.example.geektrust.Services.PrintingService;
 
 import java.util.Map;
 import java.util.PriorityQueue;

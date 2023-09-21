@@ -1,4 +1,4 @@
-package org.example.Services;
+package org.example.geektrust.Services;
 
 public interface CardService {
     public void addCard(String cardId, int balance);

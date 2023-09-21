@@ -1,10 +1,10 @@
-package org.example.Services.implementation;
+package org.example.geektrust.Services.implementation;
 
-import org.example.Constants.MetroCardConstants;
-import org.example.Entities.Journey;
-import org.example.EntityManager.StationManager;
-import org.example.Services.CardService;
-import org.example.Services.JourneyService;
+import org.example.geektrust.Constants.MetroCardConstants;
+import org.example.geektrust.Entities.Journey;
+import org.example.geektrust.EntityManager.StationManager;
+import org.example.geektrust.Services.CardService;
+import org.example.geektrust.Services.JourneyService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,11 +24,11 @@ public class JourneyServiceImplementation implements JourneyService {
 
     @Override
     public void checkInPassenger(Journey journey) {
-        if(passengerJourneyMap.containsKey(journey.getCardId())) {
-            computeFare(journey, true);
+        boolean isReturnJourney = passengerJourneyMap.containsKey(journey.getCardId());
+        computeFare(journey, isReturnJourney);
+        if(isReturnJourney) {
             passengerJourneyMap.remove(journey.getCardId());
         }else{
-            computeFare(journey, false);
             passengerJourneyMap.put(journey.getCardId(), journey.getSourceStation().name());
         }
     }
@@ -36,10 +36,9 @@ public class JourneyServiceImplementation implements JourneyService {
     private void computeFare(Journey journey, boolean isReturnJourney) {
 
         int baseFare = journey.getPassengerType().getVal();
+        int discount = isReturnJourney ? baseFare/MetroCardConstants.TWO : 0;
         if(isReturnJourney)
-            baseFare /= MetroCardConstants.DISCOUNT_FACTOR;
-
-        int discount = isReturnJourney ? baseFare/MetroCardConstants.DISCOUNT_FACTOR : 0;
+            baseFare /= MetroCardConstants.TWO;
 
         int journeyCollection = baseFare;
         int addedAmount = cardService.transact(journey.getCardId(), baseFare);

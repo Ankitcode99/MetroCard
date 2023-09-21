@@ -1,8 +1,9 @@
-package org.example.Services.implementation;
+package org.example.geektrust.Services.implementation;
 
-import org.example.Constants.MetroCardConstants;
-import org.example.EntityManager.CardManager;
-import org.example.Services.CardService;
+import org.example.geektrust.Constants.MetroCardConstants;
+import org.example.geektrust.Entities.Card;
+import org.example.geektrust.EntityManager.CardManager;
+import org.example.geektrust.Services.CardService;
 
 public class CardServiceImplementation implements CardService {
 
@@ -13,7 +14,7 @@ public class CardServiceImplementation implements CardService {
 
     @Override
     public void addCard(String cardId, int balance) {
-        cardManager.addNewCard(cardId, balance);
+        cardManager.addNewCard(cardId, new Card(cardId, balance));
     }
 
     @Override
@@ -22,7 +23,7 @@ public class CardServiceImplementation implements CardService {
         int difference = cardBalance - amount;
         if(difference < 0){
             cardManager.updateCardBalance(cardId, MetroCardConstants.ZERO);
-            return difference;
+            return Math.abs(difference);
         }
         cardManager.updateCardBalance(cardId, difference);
         return MetroCardConstants.ZERO;

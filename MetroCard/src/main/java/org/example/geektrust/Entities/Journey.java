@@ -1,7 +1,7 @@
-package org.example.Entities;
+package org.example.geektrust.Entities;
 
-import org.example.Enums.PassengerType;
-import org.example.Enums.Station;
+import org.example.geektrust.Enums.PassengerType;
+import org.example.geektrust.Enums.Station;
 
 public class Journey {
     private String cardId;

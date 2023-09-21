@@ -1,4 +1,4 @@
-package org.example.Enums;
+package org.example.geektrust.Enums;
 
 public enum Station {
     CENTRAL,
